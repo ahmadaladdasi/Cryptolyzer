@@ -10,5 +10,11 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    }
   }
 };
