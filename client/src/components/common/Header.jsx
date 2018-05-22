@@ -5,7 +5,7 @@ import './Header.css';
 const Header = () => (
     <div className='header'>
       <img src={logo} alt='Logo' className='header-logo'/>
-      <h1 className='header-logo'>Cryptolyzer</h1>
+      <h1 className='header'>Cryptolyzer</h1>
     </div>
 );
 

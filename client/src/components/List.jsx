@@ -1,12 +1,47 @@
 import React from 'react';
-import ListItem from './ListItem.jsx';
 
-const List = (props) => (
-  <div>
-    <h4> List Component </h4>
-    There are { props.items.length } items.
-    { props.items.map(item => <ListItem item={item}/>)}
-  </div>
-)
+class List extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loading: false,
+      currencies: [],
+      error: null,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    fetch('https://api.udilia.com/coins/v1/cryptocurrencies?page=1&perPage=20')
+      .then((response) => {
+        return response.json().then((json) => {
+          return response.ok ? json : Promise.reject(json);
+        });
+      })
+      .then((data) => {
+        this.setState({
+          currencies: data.currencies,
+          loading: false,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.errorMessage,
+          loading: false,
+        });
+      });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (<div>Loading...</div>);
+    }
+
+    return (
+      <div>text</div>
+    );
+  }
+}
 
 export default List;
